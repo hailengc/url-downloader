@@ -16,7 +16,8 @@ end
 def download_img_by_url(url)
 	response = RestClient.get(url)
 	if response.headers[:content_type].include?('image')
-		File.open("image/a.jpg", "wb") { |file|  file.write(response.body)}
+		name = url.split('/').last
+		File.open("image/#{name}", "wb") { |file|  file.write(response.body)}
 	else
 		raise NotImageException
 	end
@@ -67,5 +68,3 @@ def main
 end
 
 main()
-
-
